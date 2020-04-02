@@ -7,7 +7,7 @@ import {
   useHistory
 } from 'react-router-dom';
 import Login from './pages/Login';
-import Home from './pages/Home/home';
+import Home from './pages/Home';
 import { getUserStorage } from './data/storage';
 
 const ProtectedRouter: React.FunctionComponent<{}> = () => {

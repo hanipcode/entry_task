@@ -1,0 +1,41 @@
+.loading-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 990;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba($color: #000000, $alpha: 0.8);
+  opacity: 0;
+  transition: all 0.5s;
+
+  &.visible {
+    opacity: 1;
+  }
+
+  p {
+    color: #fff;
+    animation: blink 2.5s ease-in-out infinite;
+  }
+}
+
+@keyframes blink {
+  25% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

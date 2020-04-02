@@ -1,0 +1,27 @@
+@import '../../styles/colors';
+
+.header {
+  height: 40px;
+  display: flex;
+  background: $primary;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 16px;
+
+  .icon {
+    width: 24px;
+    height: 24px;
+    fill: $primary-dark;
+
+    &:nth-child(2) {
+      fill: $complement;
+    }
+  }
+
+  img {
+    width: 24px;
+    height: 24px;
+    border-radius: 100%;
+  }
+}

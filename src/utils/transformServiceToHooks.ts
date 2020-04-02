@@ -1,9 +1,24 @@
 import { useState, useCallback, useEffect } from 'react';
 import { IResponse } from '../types/service/response.types';
 
-function transformServiceToHook<ResponseType, InitialValue, ServiceParam = {}>(
-  serviceFn: (param?: ) => IResponse<ResponseType>,
-  initialValue: InitialValue,
+type serviceFnPlain<ServiceParam, ResponseType> = (
+  param?: ServiceParam
+) => Promise<IResponse<ResponseType>>;
+type serviceFnParamRequired<ServiceParam, ResponseType> = (
+  param: ServiceParam
+) => Promise<IResponse<ResponseType>>;
+type serviceFnWithId<ServiceParam, ResponseType> = (
+  userId: number,
+  param?: ServiceParam
+) => Promise<IResponse<ResponseType>>;
+type ServiceFn<ServiceParam, ResponseType> =
+  | serviceFnPlain<ServiceParam, ResponseType>
+  | serviceFnWithId<ServiceParam, ResponseType>
+  | serviceFnParamRequired<ServiceParam, ResponseType>;
+
+function transformServiceToHook<ResponseType, ServiceParam = null>(
+  serviceFn: ServiceFn<ServiceParam, ResponseType>,
+  initialValue: any = [],
   withEffect = false
 ) {
   return function useService() {
@@ -14,30 +29,58 @@ function transformServiceToHook<ResponseType, InitialValue, ServiceParam = {}>(
       async (param?: ServiceParam, callback?: Function) => {
         try {
           setLoading(true);
-          const data = await serviceFn(param);
-
-          setData(data);
+          const data = await (serviceFn as serviceFnPlain<
+            ServiceParam,
+            ResponseType
+          >)(param);
+          setData(data.data);
           if (callback) {
             callback(data);
           }
         } catch (error) {
           alert(error.message);
         }
+        setLoading(false);
+      },
+      []
+    );
+
+    const actionWithParam = useCallback(
+      async (param: ServiceParam, callback?: Function) => {
+        try {
+          setLoading(true);
+          const data = await (serviceFn as serviceFnPlain<
+            ServiceParam,
+            ResponseType
+          >)(param);
+          setData(data.data);
+          if (callback) {
+            callback(data);
+          }
+        } catch (error) {
+          alert(error.message);
+        }
+        setLoading(false);
       },
       []
     );
 
     const actionWithId = useCallback(
-      async (id: string, param?: ServiceParam, callback?: Function) => {
+      async (id: number, param?: ServiceParam, callback?: Function) => {
         try {
-          const data: IResponse = await serviceFn(id, param);
-          setData(data);
+          setLoading(true);
+          const data = await (serviceFn as serviceFnWithId<
+            ServiceParam,
+            ResponseType
+          >)(id, param);
+          setData(data.data);
           if (callback) {
             callback(data);
           }
         } catch (error) {
           alert(error.message);
         }
+        setLoading(false);
       },
       []
     );
@@ -52,7 +95,8 @@ function transformServiceToHook<ResponseType, InitialValue, ServiceParam = {}>(
       loading,
       data,
       action,
-      actionWithId
+      actionWithId,
+      actionWithParam
     };
   };
 }
