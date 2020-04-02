@@ -1,0 +1,17 @@
+$primary: #8560a9;
+$primary-neutral: #67616d;
+$primary-light: #d3c1e5;
+$primary-dark: #453257;
+$background: #faf9fc;
+$complement: #d5ef7f;
+$complement-dark-1: #aecb4f;
+$complement-dark-2: #788c36;
+$complement-light: #e5f7a9;
+
+.text-complement {
+  color: $complement;
+}
+
+.bg-primary {
+  background: $primary;
+}

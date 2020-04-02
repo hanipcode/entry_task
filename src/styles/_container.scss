@@ -1,0 +1,25 @@
+body {
+  min-width: 100vw;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  color: $primary-dark;
+}
+
+input {
+  color: $primary-dark;
+}
+
+.page-container {
+  min-width: $max-page-width;
+  min-height: 572px;
+  margin: auto auto;
+  position: relative;
+  background-color: $background;
+  font-family: 'Source Sans Pro', sans-serif;
+}
