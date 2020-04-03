@@ -2,6 +2,9 @@
 
 .listItem {
   overflow-y: scroll;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #e8e8e8;
+
   header {
     display: flex;
     flex-direction: row;
@@ -51,6 +54,38 @@
 
   .content {
     font-size: 14px;
+  }
+
+  .action-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 16px;
+    div {
+      font-size: 12px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      cursor: pointer;
+
+      &:nth-child(1) {
+        margin-right: 32px;
+      }
+    }
+
+    .icon {
+      width: 14px;
+      height: 14px;
+      fill: $primary;
+      margin-right: 4px;
+
+      &.selected {
+        fill: $complement;
+      }
+      &.selected-heart {
+        fill: red;
+      }
+    }
   }
 }
 

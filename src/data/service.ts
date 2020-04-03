@@ -17,7 +17,6 @@ const axiosBoongan = <Response>(
   new Promise((resolve, reject) => {
     setTimeout(() => {
       const data = dataGetter();
-      console.log(data);
 
       if (data.isError || !data.data) {
         reject(data);

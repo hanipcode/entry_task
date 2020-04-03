@@ -14,8 +14,11 @@ const initialState: IUserState = {
 interface ILikePayload {
   id: number;
 }
+interface IGetPayload {
+  id: number[];
+}
 
-type Payload = ILikePayload;
+type Payload = ILikePayload | IGetPayload;
 
 export default function UserReducer(
   state: IUserState = initialState,
@@ -34,6 +37,16 @@ export default function UserReducer(
           ...state.participated,
           (action.payload as ILikePayload).id
         ]
+      };
+    case UserAction.GetLiked:
+      return {
+        ...state,
+        liked: (action.payload as IGetPayload).id
+      };
+    case UserAction.GetParticipated:
+      return {
+        ...state,
+        participated: (action.payload as IGetPayload).id
       };
   }
   return state;
