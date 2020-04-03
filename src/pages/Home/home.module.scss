@@ -1,0 +1,9 @@
+@import '../../styles/colors';
+@import '../../styles/variables';
+
+.home {
+  padding: 16px;
+  max-width: $max-page-width;
+  padding-top: 56px;
+  box-sizing: border-box;
+}

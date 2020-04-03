@@ -8,7 +8,7 @@ body {
   justify-content: center;
   overflow: hidden;
 
-  color: $primary-dark;
+  color: $primary-neutral;
 }
 
 input {
@@ -16,8 +16,9 @@ input {
 }
 
 .page-container {
-  min-width: $max-page-width;
-  min-height: 572px;
+  width: $max-page-width;
+  overflow: scroll;
+  height: 572px;
   margin: auto auto;
   position: relative;
   background-color: $background;
